@@ -1,0 +1,72 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://scenes/Rocket.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/Meteor.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scenes/Heart.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scripts/Arena.gd" type="Script" id=4]
+[ext_resource path="res://sprites/5509862.jpg" type="Texture" id=5]
+[ext_resource path="res://scripts/Heart3.gd" type="Script" id=6]
+[ext_resource path="res://scripts/Heart2.gd" type="Script" id=7]
+[ext_resource path="res://scenes/Meteor2.tscn" type="PackedScene" id=8]
+[ext_resource path="res://scenes/Meteor3.tscn" type="PackedScene" id=9]
+[ext_resource path="res://fonts/EdgeOfTheGalaxyRegular-OVEa6.otf" type="DynamicFontData" id=10]
+[ext_resource path="res://scenes/Score.gd" type="Script" id=11]
+[ext_resource path="res://scenes/Bullet.tscn" type="PackedScene" id=12]
+
+[sub_resource type="DynamicFont" id=1]
+size = 64
+font_data = ExtResource( 10 )
+
+[node name="Arena" type="Node2D"]
+script = ExtResource( 4 )
+metors = [ ExtResource( 2 ), ExtResource( 8 ), ExtResource( 9 ), ExtResource( 12 ) ]
+
+[node name="background" type="Sprite" parent="."]
+position = Vector2( 512.5, 300 )
+scale = Vector2( 0.342, 0.3 )
+z_index = -20
+texture = ExtResource( 5 )
+
+[node name="Rocket" parent="." instance=ExtResource( 1 )]
+position = Vector2( 168, 483 )
+
+[node name="metor_spawn" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="Difficulty_mulriplyer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="Heart" parent="." instance=ExtResource( 3 )]
+visible = false
+position = Vector2( 178, 586 )
+
+[node name="Heart2" parent="." instance=ExtResource( 3 )]
+visible = false
+position = Vector2( 101, 585 )
+script = ExtResource( 7 )
+
+[node name="Heart3" parent="." instance=ExtResource( 3 )]
+visible = false
+position = Vector2( 28, 585 )
+script = ExtResource( 6 )
+
+[node name="Node2D" type="Node2D" parent="."]
+z_index = 30
+
+[node name="Control" type="Control" parent="Node2D"]
+margin_right = 40.0
+margin_bottom = 40.0
+
+[node name="Score" type="Label" parent="Node2D/Control"]
+margin_left = 12.0
+margin_top = 10.0
+margin_right = 222.0
+margin_bottom = 83.0
+custom_fonts/font = SubResource( 1 )
+text = "Score:"
+script = ExtResource( 11 )
+
+[connection signal="timeout" from="metor_spawn" to="." method="_on_metor_spawn_timeout"]
+[connection signal="timeout" from="Difficulty_mulriplyer" to="." method="_on_Difficulty_mulriplyer_timeout"]

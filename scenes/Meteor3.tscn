@@ -1,0 +1,17 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scenes/Meteor.tscn" type="PackedScene" id=1]
+[ext_resource path="res://sprites/Meteors/Meteor_10.png" type="Texture" id=2]
+
+[node name="Meteor3" instance=ExtResource( 1 )]
+scale = Vector2( 0.16, 0.16 )
+texture = ExtResource( 2 )
+
+[node name="Area2D" parent="." index="0"]
+visible = false
+
+[node name="CollisionPolygon2D" parent="Area2D" index="0"]
+polygon = PoolVector2Array( -118.75, -93.75, -75, -125, -62.5, -125, -25, -131.25, 6.25, -150, 31.25, -150, 62.5, -150, 100, -150, 125, -143.75, 143.75, -137.5, 150, -125, 150, -100, 150, -68.75, 143.75, -56.25, 150, -37.5, 143.75, -6.25, 143.75, 68.75, 125, 112.5, 100, 131.25, 62.5, 137.5, 31.25, 131.25, -12.5, 137.5, -43.75, 150, -112.5, 150, -137.5, 118.75, -150, 112.5, -137.5, 68.75, -143.75, 43.75, -143.75, 18.75, -137.5, -25 )
+
+[node name="VisibilityNotifier2D" parent="." index="1"]
+visible = false

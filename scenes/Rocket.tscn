@@ -1,0 +1,35 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://sprites/Sprites/Missile/Missile_3_Explosion_000.png" type="Texture" id=1]
+[ext_resource path="res://sprites/Sprites/Circle.png" type="Texture" id=2]
+[ext_resource path="res://scripts/Rocket.gd" type="Script" id=3]
+
+[node name="Rocket" type="Sprite"]
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 1 )
+script = ExtResource( 3 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+modulate = Color( 1, 0, 0, 0.52549 )
+position = Vector2( 0, 150 )
+rotation = 1.5708
+scale = Vector2( 0.2, 0.2 )
+amount = 40
+speed_scale = 6.4
+randomness = 0.4
+texture = ExtResource( 2 )
+gravity = Vector2( 0, 90 )
+initial_velocity = 1000.0
+initial_velocity_random = 0.54
+
+[node name="Area2D" type="Area2D" parent="." groups=["Player"]]
+visible = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
+visible = false
+polygon = PoolVector2Array( 0, -150, -26.6667, -73.3333, -26.6667, -66.6667, -73.3333, -53.3333, -73.3333, -50, -26.6667, -50, -23.3333, 10, -23.3333, 76.6667, -60, 100, -60, 110, -26.6667, 110, -26.6667, 116.667, -26.6667, 123.333, 26.6667, 123.333, 30, 110, 63.3333, 110, 60, 96.6667, 23.3333, 76.6667, 23.3333, 6.66667, 23.3333, -46.6667, 73.3333, -50, 73.3333, -53.3333, 23.3333, -66.6667, 23.3333, -86.6667 )
+
+[node name="Timer" type="Timer" parent="."]
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
